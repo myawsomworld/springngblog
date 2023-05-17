@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, FormControl, Validators} from "@angular/forms";
+import {RegisterPayload} from "../register-payload";
+import {AuthService} from "../auth.service";
+// import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -8,30 +12,41 @@ import { Component } from '@angular/core';
 export class RegisterComponent {
 registerForm: FormGroup;
 registerPayload: RegisterPayload;
+// registerPayload: { password: string; confirmPassword: string; email: string; username: string };
 
-constructor(private formBuilder:FormBuilder){
-  this.formBuilder.group(controlConfig{
+constructor(private formBuilder:FormBuilder, private authService:AuthService){
+   this.registerForm= this.formBuilder.group({
     username:'',
     email:'',
-    password:''.
-    confirmpassword:''
+    password:'',
+    confirmPassword:''
   });
 
-  this.registerPayload={
+  this.registerPayload = {
     username:'',
     email:'',
     password: '',
-    confirmpassword:''
+    confirmPassword:''
   };
 }
 
 
-ngOnInit(){}
+ngOnInit(){
+
+}
 
 onSubmit(){
-  this.registerForm.get('username').value;
-  this.registerForm.get('email').value;
-  this.registerForm.get('password').value;
-  this.registerForm.get('confirmpassword').value;
-}
+  this.registerPayload.username=this.registerForm.get('username')?.value;
+  this.registerPayload.email= this.registerForm.get('email')?.value
+  this.registerPayload.password= this.registerForm.get('password')?.value;
+  this.registerPayload.confirmPassword= this.registerForm.get('confirmpassword')?.value;
+
+
+  this.authService.register(this.registerPayload).Observable.subscribe({
+    next: console.log("Registration successful"),
+    error: console.log("Registration failed")
+  })
+  }
+
+
 }
