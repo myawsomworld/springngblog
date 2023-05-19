@@ -26,7 +26,7 @@ export class AuthService {
       this.localStorageService.store('authenticationToken', data.authenticationToken);
       this.localStorageService.store('username',data.username);
 
-      return true;
+      return true ;
       }
     ));
   }
