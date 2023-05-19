@@ -29,6 +29,8 @@ public class AuthService {
 
     @Autowired
     private JwtProvider jwtProvider;
+    private AuthenticationResponse AutResponse;
+
 
     public void signup(RegisterRequest registerRequest){
         User user = new User();
@@ -44,14 +46,19 @@ public class AuthService {
         return passwordEncoder.encode(password);
     }
 
-    public String login(LoginRequest loginRequest) {
+    public AuthenticationResponse login(LoginRequest loginRequest) {
+        System.out.println(loginRequest.getUsername());
+        System.out.println(loginRequest.getPassword());
         Authentication authenticate= authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
                 loginRequest.getPassword()));
+
         SecurityContextHolder.getContext().setAuthentication(authenticate);
-        return jwtProvider.generateToken(authenticate);
+        String authenticationToken =  jwtProvider.generateToken(authenticate);
+
+        return  new AuthenticationResponse(authenticationToken, loginRequest.getUsername() );
     }
 
-    public <T> Optional<org.springframework.security.core.userdetails.User> getCurrentuser() {
+    public Optional<org.springframework.security.core.userdetails.User> getCurrentUser() {
         org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return Optional.of(principal);
     }

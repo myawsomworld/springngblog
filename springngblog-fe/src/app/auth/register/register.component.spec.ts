@@ -6,7 +6,7 @@ import { map, filter } from 'rxjs/operators';
 // import 'jasmine';
 // import 'jest';
 // import 'mocha';
-import '@types/jest';
+import 'jest';
 import {AuthService} from "../auth.service";
 
 describe('RegisterComponent', () => {

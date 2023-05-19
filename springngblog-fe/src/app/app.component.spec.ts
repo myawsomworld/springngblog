@@ -5,7 +5,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 // import 'jest';
 // import 'mocha';
 // import {} from 'jasmine';
-import '@types/jest';
+import 'jest';
 
 describe('AppComponent', () => {
   beforeEach(() => {

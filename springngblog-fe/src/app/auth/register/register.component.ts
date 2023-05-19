@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, FormControl, Validators} from "@angular/forms";
 import {RegisterPayload} from "../register-payload";
 import {AuthService} from "../auth.service";
+import {Router} from "@angular/router";
+// import {error} from "@angular/compiler-cli/src/transformers/util";
 // import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
 
 @Component({
@@ -14,12 +16,12 @@ registerForm: FormGroup;
 registerPayload: RegisterPayload;
 // registerPayload: { password: string; confirmPassword: string; email: string; username: string };
 
-constructor(private formBuilder:FormBuilder, private authService:AuthService){
-   this.registerForm= this.formBuilder.group({
-    username:'',
-    email:'',
-    password:'',
-    confirmPassword:''
+constructor(private formBuilder:FormBuilder, private authService:AuthService, private router: Router){
+   this.registerForm= new FormGroup({
+    username:new FormControl(),
+    email:new FormControl(),
+    password:new FormControl(),
+    confirmPassword:new FormControl()
   });
 
   this.registerPayload = {
@@ -42,9 +44,9 @@ onSubmit(){
   this.registerPayload.confirmPassword= this.registerForm.get('confirmpassword')?.value;
 
 
-  this.authService.register(this.registerPayload).Observable.subscribe({
-    next: console.log("Registration successful"),
-    error: console.log("Registration failed")
+  this.authService.register(this.registerPayload).subscribe( () => {
+    next: console.log("Registration successful"); this.router.navigateByUrl('/register-success');
+    // error("Registration failed")
   })
   }
 

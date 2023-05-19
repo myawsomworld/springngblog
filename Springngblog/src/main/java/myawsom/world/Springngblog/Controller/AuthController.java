@@ -3,6 +3,7 @@ package myawsom.world.Springngblog.Controller;
 import myawsom.world.Springngblog.dto.LoginRequest;
 import myawsom.world.Springngblog.dto.RegisterRequest;
 import myawsom.world.Springngblog.service.AuthService;
+import myawsom.world.Springngblog.service.AuthenticationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +26,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest loginRequest){
-        authService.login(loginRequest);
+    public AuthenticationResponse login(@RequestBody LoginRequest loginRequest){
+
         return authService.login(loginRequest);
     }
 

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import '@types/jest';
+import 'jest';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {

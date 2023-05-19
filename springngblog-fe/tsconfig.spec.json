@@ -6,8 +6,8 @@
     "types": [
 //      "jasmine"
       "node",
-      "jest",
-      "mocha"
+//      "jest",
+//      "mocha"
     ]
   },
   "include": [

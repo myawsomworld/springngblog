@@ -25,7 +25,7 @@ public class PostService {
         Post post = new Post();
         post.setTitle(postDto.getTitle());
         post.setContent(postDto.getContent());
-        User username = authService.getCurrentuser().orElseThrow(() -> new IllegalArgumentException("No User Logged in"));
+        User username = authService.getCurrentUser().orElseThrow(() -> new IllegalArgumentException("No User Logged in"));
         post.setUsername(username.getUsername());
         post.setCreated_on(Instant.now());
         postRepository.save(post);

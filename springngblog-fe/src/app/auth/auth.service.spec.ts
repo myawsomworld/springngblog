@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import '@types/jest';
+import 'jest';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
